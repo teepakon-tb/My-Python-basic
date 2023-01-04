@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>var result = 0 </script>
+         
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+  <select id="kid" onclick="showPrice3()">
+    <option value="">-- จำนวนเด็กที่เข้าพักไม่เกิน 10 คน --</option>
+    <option value="10">1 คน</option>
+    <option value="20">2 คน</option>
+    <option value="30">3 คน</option>
+    <option value="40">4 คน</option>
+    <option value="50">5 คน</option>
+    <option value="60">6 คน</option>
+    <option value="70">7 คน</option>
+    <option value="80">8 คน</option>
+    <option value="90">9 คน</option>
+    <option value="100">10 คน</option>
+  </select>
+  <p>ราคาค่าเข้า: <span id="price3"></span> บาท/คืน</p>
+  <script>
+    function showPrice3() {
+      var x = document.getElementById("kid").value;
+      document.getElementById("price3").innerHTML = x;
+    }
+  </script>
+  <select id="Person" onclick="showPrice2()">
+    <option value="">-- จำนวนผู้ใหญ่ที่เข้าพักไม่เกิน 10 คน --</option>
+    <option value="30">1 คน</option>
+    <option value="60">2 คน</option>
+    <option value="90">3 คน</option>
+    <option value="120">4 คน</option>
+    <option value="150">5 คน</option>
+    <option value="180">6 คน</option>
+    <option value="210">7 คน</option>
+    <option value="240">8 คน</option>
+    <option value="270">9 คน</option>
+    <option value="300">10 คน</option>
+  </select>
+  <p>ราคาค่าเข้า: <span id="price2"></span> บาท/คืน</p>
+  <script>
+    function showPrice2() {
+      var x = document.getElementById("Person").value;
+      document.getElementById("price2").innerHTML = x;
+    }
+  </script>
+  <select id="mySelect">
+    <option value="0">เอาเต๊นท์มาเอง</option>
+    <option value="225">เต๊นท์ขนาด 3 คนนอน</option>
+    <option value="150">เต๊นท์ขนาด 2 คนนอน</option>
+  </select>
+  <p>ราคาค่าเช่า: <span id="price1"></span> บาท/คืน</p>
+  <span id="tent"></span>
+  <script>
+    function showPrice1() {
+      var x = parseInt(document.getElementById("mySelect").value)
+      var y = parseInt(document.getElementById("amout").value)
+      document.getElementById("price1").innerHTML = x * y;
+    }
+  </script>
+  <select id="mySelect2" onclick="showPrice4()">
+    <option value="0">เอาอุปกรณ์มาเอง</option>
+    <option value="30">ถุงนอน</option>
+    <option value="20">ผ้าห่ม</option>
+    <option value="20">แผ่นรองนอน</option>
+    <option value="20">เสื่อ</option>
+    <option value="10">หมอน</option>
+    <option value="40">ผ้าใบ</option>
+  </select>
+  <p>ราคาค่าเช่า: <span id="price4"></span> บาท/คืน</p>
+  <script>
+    function showPrice4() {
+      var w = parseInt(document.getElementById("mySelect2").value)
+      var z = parseInt(document.getElementById("amoutt").value)
+      document.getElementById("price4").innerHTML = w * z;
+    }
+  </script>
+  <script>
+    function checkinDate() {
+      const today = new Date().toISOString().split("T")[0];
+      const chkin = document.getElementById('checkin').value
+      if (chkin < today) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'วันที่ Check-in ผิด!',
+        })
+        document.getElementById('checkin').value = '';
+      }
+    }
+
+    function checkoutDate() {
+      const today = new Date().toISOString().split("T")[0];
+      const chkin = document.getElementById('checkin').value
+      const chkout = document.getElementById('checkout').value
+      if (chkout < today || chkout < chkin) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'วันที่ออกผิด!',
+        })
+        document.getElementById('checkout').value = '';
+      }
+    }
+    function sumprice1() {
+      var w = parseInt(document.getElementById("mySelect2").value)
+      var x = parseInt(document.getElementById("mySelect").value)
+      var y = parseInt(document.getElementById("Person").value)
+      var z = parseInt(document.getElementById("kid").value)
+
+      var result = w + x + y + z;
+
+      console.log(x, y, z);
+      // return result;
+
+      create(result);
+      document.getElementById("sumprice").innerHTML = result;
+      if (!isNaN(result)) { }
+    }
+    function create(result) {
+      console.log(result);
+
+      if (confirm(`ราคารวม: ${result} บาท/คืน คุณต้องการจองหรือไม่`) == true) {
+
+        var mySelect = document.getElementById("mySelect").value
+        var mySelect2 = document.getElementById("mySelect2").value
+        var Person = document.getElementById("Person").value
+        var kid = document.getElementById("kid").value
+        var name = document.getElementById("name").value
+        var checkin = document.getElementById("checkin").value
+        var checkout = document.getElementById("checkout").value
+        var phone = document.getElementById("phone").value
+        var y = parseInt(document.getElementById("amout").value)
+        var z = parseInt(document.getElementById("amoutt").value)
+
+        console.log(mySelect, mySelect2, Person, kid, result, name, checkin, checkout, phone, y, z);
+        const url = "http://localhost:3000/PriceCT";
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "id": null,
+            "ชื่อ_นามสกุลผู้จอง": name,
+            "เบอร์โทร": phone,
+            "ราคาเต๊นท์": mySelect,
+            "จำนวนเต๊นท์": y,
+            "ราคาอุปกรณ์": mySelect2,
+            "จำนวนอุปกรณ์": z,
+            "ราคาผู้ใหญ่": Person,
+            "ราคาเด็ก": kid,
+            "ราคารวม": result,
+            "วันที่เข้าพัก": checkin,
+            "วันที่ออก": checkout
+
+          })
+        })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.log(error))
+
+      }
+      else {
+        alert("ยกเลิกการจอง");
+      }
+      function addname(){
+
+      }
+    }
+
+  </script>
+
+  <input type="number" min="0" id="amout" placeholder="จำนวนเต๊นท์ที่ยืม" onblur="showPrice1()">
+  <input type="number" min="0" id="amoutt" placeholder="จำนวนอุปกรณ์ที่ยืม" onblur="showPrice4()">
+  <input type="text" id = "name" placeholder="ชื่อ-นามสกุลผู้จอง">
+  <input type="text" id = "phone" placeholder="เบอร์โทรศัพท์">
+  <button onclick="sumprice1()">บันทึกข้อมูล</button>
+  <button id="userdata" type="button" class="btn btn-secondary"><a href="/termproject/userdata.html"style="text-decoration: none; color: white;">ข้อมูลการจอง</a> </button>
+  <p>check in<input type="date" id="checkin" name="checkin" min="2023-01-04" max="2024-01-04" onblur="checkinDate()"></p>
+  <p>check out <input type="date" id="checkout" name="checkout" min="2023-01-04" max="2024-01-04" onblur="checkoutDate()"></p>
+  
+
+
+</body>
+
+</html>

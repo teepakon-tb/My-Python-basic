@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function body_load() {
+            const url = "http://localhost:3000/PriceCT";
+
+            fetch(url, { method: "GET" })
+                .then((r) => { return r.json() })
+                .then((res) => {
+                    console.log(res)
+
+                    var table = document.getElementById("tblData");
+
+                    table.innerHTML = "";
+
+                    for (var i = 0; i < res.length; i++) {
+                        var row = table.insertRow();
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        var cell6 = row.insertCell(5);
+                        var cell7 = row.insertCell(6);
+                        var cell8 = row.insertCell(7);
+                        var cell9 = row.insertCell(8);
+                        var cell10 = row.insertCell(9);
+                        var cell11 = row.insertCell(10);
+                        var cell12 = row.insertCell(11);
+                        var cell13 = row.insertCell(12);
+                        const item = res[i];
+                        cell1.innerHTML = item.id;
+                        cell2.innerHTML = item.ชื่อ_นามสกุลผู้จอง;
+                        cell3.innerHTML = item.เบอร์โทร;
+                        cell4.innerHTML = item.ราคาเต๊นท์;
+                        cell5.innerHTML = item.จำนวนเต๊นท์;
+                        cell6.innerHTML = item.ราคาอุปกรณ์;
+                        cell7.innerHTML = item.จำนวนอุปกรณ์;
+                        cell8.innerHTML = item.ราคาผู้ใหญ่;
+                        cell9.innerHTML = item.ราคาเด็ก;
+                        cell10.innerHTML = item.ราคารวม;
+                        cell11.innerHTML = item.วันที่เข้าพัก;
+                        cell12.innerHTML = item.วันที่ออก;
+                        cell13.innerHTML = "<button class='btn btn-danger' onclick='item_dele(" + item.id + ")'> Delete </button>" + "<button class='btn btn-warning' onclick='item_edit(" + item.id + ")'> Edit </button>";
+                    }
+                });
+        }
+        function item_dele(id) {
+            const url = "http://localhost:3000/PriceCT/" + id;
+
+            fetch(url, { method: "DELETE" })
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    body_load();
+                });
+        }
+        function item_edit(id) {
+  const url = "http://localhost:3000/PriceCT/" + id;
+  fetch(url, {
+    method: "GET"
+  }).then((response) => response.json())
+  .then((item) => {
+    // Open a new window
+    const popupWindow = window.open("", "Edit Item", "height=600,width=600");
+
+    // Write the form HTML to the new window
+    popupWindow.document.write(`
+      <form id="edit-form">
+        <label for="name">ชื่อ-นามสกุลผู้จอง:</label><br>
+        <input type="text" id="name" name="name" value="${item.ชื่อ_นามสกุลผู้จอง}"><br>
+        <label for="phone">เบอร์โทร:</label><br>
+        <input type="text" id="phone" name="phone" value="${item.เบอร์โทร}"><br><br>
+        <input type="submit" value="Submit">
+      </form> 
+    `);
+
+    // Add a submit event listener to the form
+    const form = popupWindow.document.getElementById('edit-form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      // Update the item object with the new form values
+      item.ชื่อ_นามสกุลผู้จอง = form.elements.name.value;
+      item.เบอร์โทร = form.elements.phone.value;
+
+      // Send the updated item back to the server
+      fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(item),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => {
+        if (response.ok) {
+          // If the update was successful, close the window
+          popupWindow.close();
+        } else {
+          // If the update failed, show an error message
+          popupWindow.document.write('<p>Error: Failed to update item.</p>');
+        }
+      });
+    });
+  });
+}
+
+
+
+    </script>
+</head>
+
+<body onload="body_load()">
+    <button id="userdata" type="button" class="btn btn-secondary"><a href="/termproject/main.html"
+            style="text-decoration: none; color: black;">กลับหน้าหลัก</a> </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ชื่อ-นามสกุลผู้จอง</th>
+                <th>เบอร์โทร</th>
+                <th>ราคาเต๊นท์</th>
+                <th>จำนวนเต๊นท์</th>
+                <th>ราคาอุปกรณ์</th>
+                <th>จำนวนอุปกรณ์</th>
+                <th>ราคาผู้ใหญ่</th>
+                <th>ราคาเด็ก</th>
+                <th>ราคารวม</th>
+                <th>วันที่เข้าพัก</th>
+                <th>วันที่ออก</th>
+                <th>Option</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tblData">
+        </tbody>
+    </table>
+</body>
+
+</html>
